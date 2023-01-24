@@ -7,13 +7,15 @@ class UserController {
     constructor(private readonly userService: UserService) { }
 
     public async filter(req: Request, res: Response) {
-        let results = await this.userService.filter('nesta iz rekvesta')
+        console.log(req)
+        let results = await this.userService.filter(req.body)
         res.status(200).json(results);
     }
 
     public async getOne(req: Request, res: Response) {
-        let results = await this.userService.getOne('nesta iz rekvesta')
-        res.status(200).json(results);
+        let result = await this.userService.getOne(Number(req.params.id))
+        if (!result) return res.status(404).send('Not found')
+        res.status(200).json(result);
     }
 
     public async create(req: Request, res: Response) {

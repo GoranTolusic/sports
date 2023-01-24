@@ -4,20 +4,19 @@ export const userMiddleware = Router();
 
 //prefix = user/
 
+//global middlewre for all user/ routes
 userMiddleware.use((req, res, next) => {
-    console.log('ovo je za sve user/rute middleware')
     next()
 })
 
-userMiddleware.use('/:id', (req: Request, res: Response, next: NextFunction) => {
-    if (typeof req.query.id !== 'number') throw new Error('Error! Wrong id')
-    console.log('ovo je middleware za sve rute koji imaju id')
+//Specificic endpoints middlewares
+userMiddleware.post('/filter', (req: Request, res: Response, next: NextFunction) => {
     next()
 });
 
-//
+
+//Specificic endpoints middlewares
 userMiddleware.get('/:id', (req: Request, res: Response, next: NextFunction) => {
-    console.log('ovo je middleware samo za get user/id rutu')
     next()
 });
 
