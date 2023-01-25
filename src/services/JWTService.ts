@@ -9,7 +9,7 @@ class JWTService {
       return token
     }
   
-    verifyToken(token: string) {
+    verifyToken(token: any) {
       let decoded = jwt.verify(token, process.env.JWT_SECRET || '')
       return decoded
     }

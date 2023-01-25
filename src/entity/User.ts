@@ -24,8 +24,11 @@ export class User {
     @Column({ default: false })
     verified: boolean;
 
-    @Column()
+    @Column({ select: false })
     verifyToken: string;
+
+    @Column()
+    age: string;
 
     @Column({ default: true })
     active: boolean;

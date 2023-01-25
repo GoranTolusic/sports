@@ -8,5 +8,5 @@ const authController = Container.get(AuthController)
 //prefix = auth/
 authRoutes.post('/register', (req, res) => authController.register(req, res));
 authRoutes.post('/login', (req, res) => authController.login(req, res));
-authRoutes.post('/verifyToken', (req, res) => authController.verifyToken(req, res));
+authRoutes.get('/verifyEmail', (req, res) => authController.verifyToken(req, res));
 

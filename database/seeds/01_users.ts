@@ -18,7 +18,7 @@ export async function seed(knex: Knex): Promise<void> {
             updatedAt: Date.now(),
             active: true,
             verified: true,
-            verifyToken: uid()
+            verifyToken: uid(32)
         },
         {
             firstName: "Pero",
@@ -30,7 +30,7 @@ export async function seed(knex: Knex): Promise<void> {
             updatedAt: Date.now(),
             active: true,
             verified: true,
-            verifyToken: uid()
+            verifyToken: uid(32)
         },
         {
             firstName: "Antun",
@@ -42,7 +42,7 @@ export async function seed(knex: Knex): Promise<void> {
             updatedAt: Date.now(),
             active: false,
             verified: true,
-            verifyToken: uid()
+            verifyToken: uid(32)
         },
         {
             firstName: "Main",
@@ -54,7 +54,7 @@ export async function seed(knex: Knex): Promise<void> {
             updatedAt: Date.now(),
             active: true,
             verified: true,
-            verifyToken: uid()
+            verifyToken: uid(32)
         }
     ]
 
