@@ -21,6 +21,12 @@ export class User {
     @Column({ default: 'author' })
     role: string;
 
+    @Column({ default: false })
+    verified: boolean;
+
+    @Column()
+    verifyToken: string;
+
     @Column({ default: true })
     active: boolean;
 

@@ -1,5 +1,6 @@
 import { Knex } from "knex";
 import * as bcrypt from 'bcrypt';
+import { uid } from 'uid';
 require('dotenv').config();
 
 export async function seed(knex: Knex): Promise<void> {
@@ -15,7 +16,9 @@ export async function seed(knex: Knex): Promise<void> {
             password: await bcrypt.hash('marko1234', salt),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            active: true
+            active: true,
+            verified: true,
+            verifyToken: uid()
         },
         {
             firstName: "Pero",
@@ -25,7 +28,9 @@ export async function seed(knex: Knex): Promise<void> {
             password: await bcrypt.hash('pero1234', salt),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            active: true
+            active: true,
+            verified: true,
+            verifyToken: uid()
         },
         {
             firstName: "Antun",
@@ -35,7 +40,9 @@ export async function seed(knex: Knex): Promise<void> {
             password: await bcrypt.hash('antun1234', salt),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            active: false
+            active: false,
+            verified: true,
+            verifyToken: uid()
         },
         {
             firstName: "Main",
@@ -45,7 +52,9 @@ export async function seed(knex: Knex): Promise<void> {
             password: await bcrypt.hash(process.env.ADMIN_PASSWORD || 'goran1234', salt),
             createdAt: Date.now(),
             updatedAt: Date.now(),
-            active: true
+            active: true,
+            verified: true,
+            verifyToken: uid()
         }
     ]
 

@@ -5,7 +5,7 @@ export const userMiddleware = Router();
 //prefix = user/
 
 //global middlewre for all user/ routes
-userMiddleware.use((req, res, next) => {
+userMiddleware.use((req: Request, res: Response, next) => {
     next()
 })
 
