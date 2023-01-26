@@ -1,4 +1,4 @@
-import { Forbidden, Unauthorized } from '@tsed/exceptions';
+import { BadRequest, Forbidden, Unauthorized } from '@tsed/exceptions';
 import { Router, Request, Response, NextFunction } from 'express';
 import JWTService from '../services/JWTService';
 import { validatorDto } from '../helpers/validatorDto';
@@ -9,7 +9,7 @@ export const userMiddleware = Router();
 
 //prefix = user/
 
-//global middlewre for all user/ routes
+//global middleware for all user/ routes
 userMiddleware.use((req: Request, res: Response, next) => {
     try {
         if (!req.headers.accesstoken) throw new Unauthorized('You are not logged in', 401)
@@ -22,16 +22,17 @@ userMiddleware.use((req: Request, res: Response, next) => {
     }
 })
 
-//Specificic endpoints middlewares
-userMiddleware.post('/filter', (req: Request, res: Response, next: NextFunction) => {
-    next()
+//Middleware for all user/:id middlewares
+userMiddleware.all('/:id', (req: Request, res: Response, next: NextFunction) => {
+    try {
+        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
+        next()
+    } catch (error) {
+        res.status(500).json(error)
+    }
 });
 
-//Specificic endpoints middlewares
-userMiddleware.get('/:id', (req: Request, res: Response, next: NextFunction) => {
-    next()
-});
-
+//Specific route middlewares
 userMiddleware.post('/', async (req: any, res: Response, next: NextFunction) => {
     try {
         if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
