@@ -17,8 +17,7 @@ export const validatorDto = async <T extends ClassConstructor<any>>(
   const errors = await validate(objInstance);
   // errors is an array of validation errors
   if (errors.length > 0) {
-    let mapped = errors.map(({ property }) => property).join(', ')
-    throw new BadRequest('Invalid or missing Fields: ' + mapped)
+    throw new BadRequest(errors.map(item => Object.values(item.constraints) ).join(' | '))
   }
   //assign validated and formated values to request params
   Object.assign(obj, { _validated: objInstance })
