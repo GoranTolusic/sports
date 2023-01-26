@@ -6,7 +6,7 @@ import UserService from '../services/UserService';
 import HashService from "./HashService";
 import JWTService from "./JWTService";
 import * as _ from "lodash"
-const nodemailer = require('nodemailer')
+import nodemailer from "nodemailer"
 
 @Service()
 class AuthService {

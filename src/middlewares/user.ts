@@ -1,7 +1,9 @@
-import { Unauthorized } from '@tsed/exceptions';
+import { Forbidden, Unauthorized } from '@tsed/exceptions';
 import { Router, Request, Response, NextFunction } from 'express';
 import JWTService from '../services/JWTService';
-import UserService from '../services/UserService';
+import { validatorDto } from '../helpers/validatorDto';
+import CreateUser from '../validationTypes/CreateUser';
+import UpdateUser from '../validationTypes/UpdateUser';
 
 export const userMiddleware = Router();
 
@@ -28,5 +30,34 @@ userMiddleware.post('/filter', (req: Request, res: Response, next: NextFunction)
 //Specificic endpoints middlewares
 userMiddleware.get('/:id', (req: Request, res: Response, next: NextFunction) => {
     next()
+});
+
+userMiddleware.post('/', async (req: any, res: Response, next: NextFunction) => {
+    try {
+        if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
+        await validatorDto(CreateUser, req.body, next, CreateUser.pickedProps())
+        next()
+    } catch (error) {
+        res.status(500).json(error)
+    }
+});
+
+userMiddleware.patch('/:id', async (req: any, res: Response, next: NextFunction) => {
+    try {
+        if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
+        await validatorDto(UpdateUser, req.body, next, UpdateUser.pickedProps())
+        next()
+    } catch (error) {
+        res.status(500).json(error)
+    }
+});
+
+userMiddleware.delete('/:id', async (req: any, res: Response, next: NextFunction) => {
+    try {
+        if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
+        next()
+    } catch (error) {
+        res.status(500).json(error)
+    }
 });
 

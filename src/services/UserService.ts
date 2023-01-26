@@ -1,15 +1,13 @@
 import { Service } from "typedi";
-import { In, ObjectLiteral } from "typeorm";
+import { In, Like, ObjectLiteral } from "typeorm";
 import { AppDataSource } from "../helpers/data-source";
 import { User } from "../entity/User";
 import CreateUser from "../validationTypes/CreateUser";
-import { Response } from "express";
 import { BadRequest, Forbidden, InternalServerError, NotFound, Unauthorized } from "@tsed/exceptions";
 import HashService from "./HashService";
 import AuthService from "./AuthService";
 import * as _ from "lodash"
-const nodemailer = require('nodemailer')
-
+import UpdateUser from "../validationTypes/UpdateUser";
 
 @Service()
 class UserService {
@@ -30,27 +28,62 @@ class UserService {
     //insert user
     let created = await this.userRepository.save(inputs)
 
-    //TODO send email for verifying
+    //send email for verifying
     await this.authService.sendMail(created).catch(console.error);
 
-    //return user without password information
-    return _.omit(created, ['password'])
+    //return user without password and verifyToken information because of security issues
+    return _.omit(created, ['password', 'verifyToken'])
+  }
+
+  async update(id: number, params: UpdateUser): Promise<User> {
+    //Fetch user
+    let user = await this.getOne(id)
+
+    //check unique email
+    if (params.email && user.email !== params.email) {
+      let findIfExists = await this.userRepository.findOneBy({ email: params.email })
+      if (findIfExists) throw new Forbidden('Email already exists')
+    }
+
+    //Assign new values to existing user
+    Object.assign(user, params)
+    return await this.userRepository.save(user)
+  }
+
+  async delete(id: number): Promise<User> {
+     //Fetch user
+     let user = await this.getOne(id)
+    await this.userRepository.delete(id)
+    return user
   }
 
   async filter(params: any): Promise<User[]> {
-    let limit = params.limit || 10
+    let { limit, age, role, keyword, page } = params
+    limit = limit || 10
+
+    //Formating where clause with filter options
+    let whereClause: ObjectLiteral = {}
+    if (role?.length) whereClause.role = In(role)
+    if (age?.length) whereClause.age = In(age)
+    if (keyword && keyword.length > 3) {
+      whereClause = [
+        { ...whereClause, "firstName": Like(`%${keyword}%`) },
+        { ...whereClause, "lastName": Like(`%${keyword}%`) }
+      ]
+    }
+
     return await this.userRepository.find({
       order: { createdAt: 'DESC' },
       take: limit,
-      skip: params.page ? (params.page - 1) * limit : 0,
-      where: {
-        role: In(params.role)
-      }
+      skip: page ? (page - 1) * limit : 0,
+      where: whereClause
     })
   }
 
-  async getOne(id: number): Promise<User | null> {
-    return await this.userRepository.findOneBy({ id: id })
+  async getOne(id: number): Promise<User> {
+    let user = await this.userRepository.findOneBy({ id: id })
+    if (!user) throw new NotFound('User Not Found')
+    return user
   }
 }
 
