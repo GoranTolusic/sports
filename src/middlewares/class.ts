@@ -7,9 +7,9 @@ import UpdateUser from '../validationTypes/UpdateUser';
 
 export const classMiddleware = Router();
 
-//prefix = user/
+//prefix = class/
 
-//global middlewre for all user/ routes
+//global middlewre for all class/ routes
 classMiddleware.use((req: Request, res: Response, next) => {
     try {
         if (!req.headers.accesstoken) throw new Unauthorized('You are not logged in', 401)
