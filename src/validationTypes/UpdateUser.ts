@@ -27,9 +27,9 @@ class UpdateUser {
     age?: string
 
     readonly updatedAt: number = Date.now()
-    
+
     static pickedProps(): string[] {
-        return ['firstName', 'lastName', 'email', 'password', 'age']
+        return ['firstName', 'lastName', 'email', 'age']
     }
 }
 
