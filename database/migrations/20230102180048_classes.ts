@@ -9,7 +9,6 @@ export async function up(knex: Knex): Promise<void> {
         table.enum('ageLevel', ['children', 'youth', 'youngAdults', 'adults', 'notSet']).defaultTo('notSet').index();
         table.enum('duration', ['oneHour', 'twoHour', 'threeHour']).index();
         table.bigInteger('start');
-        table.bigInteger('end');
         table.bigInteger('createdAt');
         table.bigInteger('updatedAt');
     });
