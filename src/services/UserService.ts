@@ -8,13 +8,16 @@ import HashService from "./HashService";
 import AuthService from "./AuthService";
 import * as _ from "lodash"
 import UpdateUser from "../validationTypes/UpdateUser";
+import { ClassUser } from "../entity/ClassUser";
 
 @Service()
 class UserService {
   public userRepository
+  public userClassRepository
   constructor(private hashService: HashService,
     private authService: AuthService) {
     this.userRepository = AppDataSource.getRepository(User)
+    this.userClassRepository = AppDataSource.getRepository(ClassUser)
   }
 
   async create(inputs: CreateUser) {
@@ -51,8 +54,8 @@ class UserService {
   }
 
   async delete(id: number): Promise<User> {
-     //Fetch user
-     let user = await this.getOne(id)
+    //Fetch user
+    let user = await this.getOne(id)
     await this.userRepository.delete(id)
     return user
   }
@@ -84,6 +87,14 @@ class UserService {
     let user = await this.userRepository.findOneBy({ id: id })
     if (!user) throw new NotFound('User Not Found')
     return user
+  }
+
+  async getUsersClass(id: number): Promise<ClassUser[]> {
+    return await this.userClassRepository.find({
+      relations: { class: true },
+      where: { userId: id },
+      order: { createdAt: 'DESC' }
+    })
   }
 }
 

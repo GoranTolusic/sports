@@ -18,6 +18,6 @@ export class Sport {
     @Column()
     updatedAt: number;
 
-    @OneToMany(type => Class, clas => clas.sport, { eager: true })
+    @OneToMany(type => Class, clas => clas.sport)
     classes: Class[];
 }

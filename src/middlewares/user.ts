@@ -33,8 +33,18 @@ userMiddleware.post('/', async (req: any, res: Response, next: NextFunction) => 
     }
 });
 
+userMiddleware.get('/:id', async (req: any, res: Response, next: NextFunction) => {
+    try {
+        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
+        next()
+    } catch (error) {
+        res.status(500).json(error)
+    }
+});
+
 userMiddleware.patch('/:id', async (req: any, res: Response, next: NextFunction) => {
     try {
+        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
         if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
         await validatorDto(UpdateUser, req.body, next, UpdateUser.pickedProps())
         next()
@@ -45,6 +55,7 @@ userMiddleware.patch('/:id', async (req: any, res: Response, next: NextFunction)
 
 userMiddleware.delete('/:id', async (req: any, res: Response, next: NextFunction) => {
     try {
+        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
         if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')
         next()
     } catch (error) {

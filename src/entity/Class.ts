@@ -1,4 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import { ClassUser } from "./ClassUser";
+import { ClassUserComments } from "./ClassUserComments";
 import { Sport } from "./Sport";
 
 @Entity('classes')
@@ -29,4 +31,8 @@ export class Class {
     
     @ManyToOne(type => Sport, sport => sport.classes, { onDelete: 'CASCADE', eager: true })
     sport: Sport;
+
+    classUsers: ClassUser
+
+    classComment: ClassUserComments
 }

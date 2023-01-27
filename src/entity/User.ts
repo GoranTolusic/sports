@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { ClassUser } from "./ClassUser";
+import { ClassUserComments } from "./ClassUserComments";
 
 @Entity('users')
 export class User {
-
     @PrimaryGeneratedColumn()
     id: number
 
@@ -39,4 +40,7 @@ export class User {
     @Column()
     updatedAt: number;
 
+    classUsers: ClassUser
+
+    userComment: ClassUserComments
 }

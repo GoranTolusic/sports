@@ -1,6 +1,5 @@
 import { IsNotEmpty, IsEmail, IsString, IsIn, IsOptional } from 'class-validator';
 import { Service } from "typedi";
-import { uid } from 'uid';
 
 @Service()
 class UpdateUser {
