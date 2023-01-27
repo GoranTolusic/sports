@@ -18,10 +18,11 @@ class ClassController {
     public async getOne(req: any, res: Response) {
         try {
             let result = await this.classService.getOne(Number(req.params.id))
+
+            //Assign average rating and comments if you are permitted
             Object.assign(result, await this.classService.calculateAvg(result.id))
             Object.assign(result, { comments: await this.classService.getFeedbackComments(result.id, req.loggedUser.role) })
-            //ovdje napraviti još jedan call na neki servis koji će mi vratiti avg
-            //i još jedan servis koji će mi vratiti komentare , ako sam obican user ne vidim usera jer mora biti anoniman
+
             res.json(result)
         } catch (error) {
             res.status(500).json(error)

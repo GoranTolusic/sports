@@ -18,9 +18,12 @@ class UserController {
     public async getOne(req: any, res: Response) {
         try {
             let result = await this.userService.getOne(Number(req.params.id))
+
+            //assign users classes if you are permitted
             if (req.loggedUser.role == 'admin' || result.id == req.loggedUser.id) {
                 Object.assign(result, { classes: (await this.userService.getUsersClass(result.id)).map(item => item.class) })
             }
+
             res.json(result)
         } catch (error) {
             res.status(500).json(error)
