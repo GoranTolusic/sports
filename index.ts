@@ -16,6 +16,8 @@ import { classMiddleware } from './src/middlewares/class';
 import { customMiddleware } from './src/middlewares/custom';
 
 dotenv.config();
+
+//bootstrap the app
 const app: Express = express();
 app.use(bodyParser.json()).use(bodyParser.urlencoded({ extended: true }));
 
