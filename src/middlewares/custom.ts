@@ -21,9 +21,8 @@ customMiddleware.post('/enroll', async (req: Request, res: Response, next: NextF
     }
 });
 
-customMiddleware.delete('/unenroll', async (req: Request, res: Response, next: NextFunction) => {
+customMiddleware.delete('/unenroll/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
-
         next()
     } catch (error) {
         res.status(400).json(error)
