@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'user'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'user'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: ''
+      # Allow empty password
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+    networks:
+      - new
+  app:
+    environment:
+      - DOCKER_DB_HOST=db
+    depends_on:
+      - db
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - new
+# Names our volume
+volumes:
+  my-db:
+networks:
+  new:

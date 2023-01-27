@@ -22,16 +22,6 @@ userMiddleware.use((req: Request, res: Response, next) => {
     }
 })
 
-//Middleware for all user/:id middlewares
-userMiddleware.all('/:id', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
-        next()
-    } catch (error) {
-        res.status(500).json(error)
-    }
-});
-
 //Specific route middlewares
 userMiddleware.post('/', async (req: any, res: Response, next: NextFunction) => {
     try {

@@ -3,7 +3,7 @@ dotenv.config();
 const mysql = require('mysql');
 const _ = require('lodash');
 const dbCred = {
-  host: process.env.DB_HOST,
+  host: process.env.DOCKER_DB_HOST || process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,

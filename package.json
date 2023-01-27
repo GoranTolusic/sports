@@ -16,7 +16,8 @@
     "updateApp": "rm -rf node_modules/ && rm -rf package-lock.json && npm i && knex migrate:latest",
     "dockerize": " npm run dockerImage && npm run dockerRun ",
     "dockerImage": "docker build -t sports --network=host .",
-    "dockerRun": "docker run --network=host sports"
+    "dockerRun": "docker run --network=host sports",
+    "dockerDeploy": "docker-compose up -d && sleep 10 && npm run dockerInstall"
   },
   "author": "",
   "license": "ISC",

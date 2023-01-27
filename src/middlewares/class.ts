@@ -22,16 +22,6 @@ classMiddleware.use((req: Request, res: Response, next) => {
     }
 })
 
-//Middleware for all class/:id middlewares
-classMiddleware.all('/:id', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        if (isNaN(Number(req.params.id))) throw new BadRequest('Invalid URI id')
-        next()
-    } catch (error) {
-        res.status(500).json(error)
-    }
-});
-
 classMiddleware.post('/', async (req: any, res: Response, next: NextFunction) => {
     try {
         if (req.loggedUser.role !== 'admin') throw new Forbidden('You have no permission for this action')

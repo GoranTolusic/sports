@@ -7,7 +7,7 @@ dotenv.config();
 
 export const AppDataSource = new DataSource({
     type: 'mysql',
-    host: process.env.DB_HOST,
+    host: process.env.DOCKER_DB_HOST || process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,

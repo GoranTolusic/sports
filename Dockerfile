@@ -13,7 +13,7 @@ RUN npm install
 COPY . .
 
 # create DB, run migrations, seeders etc...
-RUN npm run dockerInstall
+#RUN npm run dockerInstall
 
 #expose application port
 EXPOSE 3000
