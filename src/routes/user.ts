@@ -5,6 +5,7 @@ import Container from 'typedi';
 export const userRoutes = Router();
 
 const userController = Container.get(UserController)
+
 //prefix = user/
 userRoutes.get('/:id', (req, res) => userController.getOne(req, res));
 userRoutes.post('/filter', (req, res) => userController.filter(req, res));

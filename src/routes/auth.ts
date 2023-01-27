@@ -5,6 +5,7 @@ import Container from 'typedi';
 export const authRoutes = Router();
 
 const authController = Container.get(AuthController)
+
 //prefix = auth/
 authRoutes.post('/register', (req, res) => authController.register(req, res));
 authRoutes.post('/login', (req, res) => authController.login(req, res));
