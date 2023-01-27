@@ -2,7 +2,7 @@
 
 -RUN WITHOUT DOCKER-
 
-SETUP books project (Make sure that Node.js (version >= 12, except for v13) is installed on your operating system and npm)
+SETUP sports project (Make sure that Node.js (version >= 12, except for v13) is installed on your operating system and npm)
 
 Requirements:
 
@@ -24,7 +24,12 @@ In terminal run "npm run installApp" in root folder. This will:
 
 In database/seeds/01_users.ts is list of users and their passwords
 
+
+
+
 -RUN THROUGH DOCKER IMAGE-
+
+SETUP OUT-OF-THE-BOX sports project
 
 Requirments:
 
@@ -43,8 +48,7 @@ Run "npm run dockerDeploy". This will:
 
 -> run seeders for dummy/test data (make sure you fill admin credentials)
 
-
 In database/seeds/01_users.ts is list of users and their passwords
-Open http://localhost:3000/api and start you're ready to go :P
+Please, import postmanDocumentation from root project inside Postman and you are ready to start testing API :)
 
 
