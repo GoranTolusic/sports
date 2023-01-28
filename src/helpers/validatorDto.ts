@@ -1,14 +1,11 @@
 import { ClassConstructor, plainToClass } from "class-transformer";
 import { validate } from "class-validator";
-import { NextFunction } from 'express';
 import { BadRequest } from "@tsed/exceptions";
 import * as _ from 'lodash'
-
 
 export const validatorDto = async <T extends ClassConstructor<any>>(
   dto: T,
   obj: Object,
-  next: NextFunction,
   pickedProps?: any[]
 ) => {
   // tranform the literal object to class object

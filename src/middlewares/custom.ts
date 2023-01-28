@@ -1,5 +1,6 @@
 import { BadRequest } from '@tsed/exceptions';
 import { Router, Request, Response, NextFunction } from 'express';
+import { authenticateUser } from '../helpers/authenticateUser';
 import { validatorDto } from '../helpers/validatorDto';
 
 export const customMiddleware = Router();
@@ -7,9 +8,7 @@ export const customMiddleware = Router();
 //prefix = custom/
 
 //global middlewre for all custom/ routes
-customMiddleware.use((req, res, next) => {
-    next()
-})
+customMiddleware.use(authenticateUser)
 
 //Specificic endpoints middlewares
 customMiddleware.post('/enroll', async (req: Request, res: Response, next: NextFunction) => {

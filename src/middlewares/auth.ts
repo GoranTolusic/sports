@@ -7,15 +7,10 @@ export const authMiddleware = Router();
 
 //prefix = auth/
 
-//global middlewre for all auth/ routes
-authMiddleware.use((req, res, next) => {
-    next()
-})
-
 //Specificic endpoints middlewares
 authMiddleware.post('/register', async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await validatorDto(CreateUser, req.body, next, CreateUser.pickedProps())
+        await validatorDto(CreateUser, req.body, CreateUser.pickedProps())
         next()
     } catch (error) {
         res.status(400).json(error)
