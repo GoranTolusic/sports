@@ -18,7 +18,6 @@ class CreateClass {
     @IsIn(['oneHour', 'twohours', 'threeHours'])
     duration?: string
 
-    @IsOptional()
     @IsNotEmpty()
     @IsNumber()
     start?: number

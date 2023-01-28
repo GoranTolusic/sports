@@ -25,7 +25,7 @@ class UpdateClass {
     readonly updatedAt: number = Date.now()
 
     static pickedProps(): string[] {
-        return ['description', 'ageLevel', 'duration']
+        return ['description', 'ageLevel', 'duration', 'start']
     }
 }
 

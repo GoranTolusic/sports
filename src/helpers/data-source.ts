@@ -1,13 +1,10 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { User } from "../entity/User"
-import dotenv from 'dotenv';
 import { Class } from "../entity/Class";
 import { Sport } from "../entity/Sport";
 import { ClassUser } from "../entity/ClassUser";
 import { ClassUserComments } from "../entity/ClassUserComments";
-
-dotenv.config();
 
 export const AppDataSource = new DataSource({
     type: 'mysql',

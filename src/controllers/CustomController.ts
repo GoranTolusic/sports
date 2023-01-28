@@ -8,8 +8,8 @@ class CustomController {
 
     public async enroll(req: any, res: Response) {
         try {
-            let results = await this.customService.enroll(req)
-            res.json(results)
+            await this.customService.enroll(req)
+            res.json({ message: 'You are successfully enroll in class' })
         } catch (error) {
             res.status(500).json(error)
         }

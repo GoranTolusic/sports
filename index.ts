@@ -1,6 +1,8 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import express, { Express } from 'express';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+
 import "reflect-metadata"
 
 //import routes
@@ -15,7 +17,7 @@ import { authMiddleware } from './src/middlewares/auth';
 import { classMiddleware } from './src/middlewares/class';
 import { customMiddleware } from './src/middlewares/custom';
 
-dotenv.config();
+
 
 //bootstrap the app
 const app: Express = express();
