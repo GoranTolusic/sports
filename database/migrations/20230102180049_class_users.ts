@@ -1,5 +1,4 @@
 import { Knex } from "knex";
-require('dotenv').config();
 
 export async function up(knex: Knex): Promise<void> {
     return knex.schema.createTable('class_users', function (table) {

@@ -2,17 +2,15 @@ import { Forbidden, NotFound, Unauthorized } from "@tsed/exceptions";
 import { Service } from "typedi";
 import { AppDataSource } from "../helpers/data-source";
 import { User } from "../entity/User";
-import UserService from '../services/UserService';
 import HashService from "./HashService";
 import JWTService from "./JWTService";
-import * as _ from "lodash"
+import { omit } from "lodash"
 import nodemailer from "nodemailer"
 
 @Service()
 class AuthService {
   private userRepository
-  constructor(private readonly userService: UserService,
-    private hashService: HashService,
+  constructor(private hashService: HashService,
     private jwtService: JWTService) {
     this.userRepository = AppDataSource.getRepository(User)
   }
@@ -25,7 +23,7 @@ class AuthService {
     if (!matches) throw new Unauthorized('Incorrect password. Try Again!')
     if (!user?.verified) throw new Forbidden('You are not verified yet, please verify your email')
     //return accessToken 
-    let result = this.jwtService.generateToken(_.omit(user, ['password']))
+    let result = this.jwtService.generateToken(omit(user, ['password']))
     return result
   }
 
@@ -58,10 +56,10 @@ class AuthService {
     let transporter = nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
-      secure: false, // true for 465, false for other ports
+      secure: false,
       auth: {
-        user: testAccount.user, // generated ethereal user
-        pass: testAccount.pass, // generated ethereal password
+        user: testAccount.user, 
+        pass: testAccount.pass, 
       },
     });
 
@@ -75,11 +73,7 @@ class AuthService {
     });
 
     console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   }
 }
 

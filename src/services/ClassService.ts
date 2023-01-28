@@ -1,8 +1,8 @@
 import { Service } from "typedi";
 import { Between, In, Like, ObjectLiteral } from "typeorm";
 import { AppDataSource } from "../helpers/data-source";
-import { BadRequest, Forbidden, InternalServerError, NotFound, Unauthorized } from "@tsed/exceptions";
-import * as _ from "lodash"
+import { NotFound } from "@tsed/exceptions";
+import { isArray } from "lodash"
 import { Class } from "../entity/Class";
 import UpdateClass from "../validationTypes/UpdateClass";
 import CreateClass from "../validationTypes/CreateClass";
@@ -43,10 +43,10 @@ class ClassService {
 
     //Formating where clause with filter options
     let whereClause: ObjectLiteral = {}
-    if (_.isArray(ageLevel) && ageLevel.length) whereClause.ageLevel = In(ageLevel)
-    if (_.isArray(duration) && duration.length) whereClause.duration = In(duration)
-    if (_.isArray(sportIds) && sportIds.length) whereClause.sportId = In(sportIds)
-    if (_.isArray(start) && start?.length == 2) whereClause.start = Between(start[0], start[1])
+    if (isArray(ageLevel) && ageLevel.length) whereClause.ageLevel = In(ageLevel)
+    if (isArray(duration) && duration.length) whereClause.duration = In(duration)
+    if (isArray(sportIds) && sportIds.length) whereClause.sportId = In(sportIds)
+    if (isArray(start) && start?.length == 2) whereClause.start = Between(start[0], start[1])
     if (keyword && keyword.length > 3) whereClause.description = Like(`%${keyword}%`)
 
     return await this.classRepository.find({

@@ -6,7 +6,7 @@ import CreateUser from "../validationTypes/CreateUser";
 import { BadRequest, Forbidden, InternalServerError, NotFound, Unauthorized } from "@tsed/exceptions";
 import HashService from "./HashService";
 import AuthService from "./AuthService";
-import * as _ from "lodash"
+import { omit } from "lodash"
 import UpdateUser from "../validationTypes/UpdateUser";
 import { ClassUser } from "../entity/ClassUser";
 
@@ -35,7 +35,7 @@ class UserService {
     await this.authService.sendMail(created).catch(console.error);
 
     //return user without password and verifyToken information because of security issues
-    return _.omit(created, ['password', 'verifyToken'])
+    return omit(created, ['password', 'verifyToken'])
   }
 
   async update(id: number, params: UpdateUser): Promise<User> {

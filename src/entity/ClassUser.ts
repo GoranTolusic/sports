@@ -1,6 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 import { Class } from "./Class";
-import { Sport } from "./Sport";
 import { User } from "./User";
 
 @Entity('class_users')
