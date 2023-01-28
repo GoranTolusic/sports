@@ -1,5 +1,5 @@
 # SPORTS CLASS APPLICATION
-# HINT: This application is writting from scratch on top of micro framewrok Express.js, whole architecture and folder structure is designed and coded by myself
+# HINT: This application is written from scratch on top of micro framewrok Express.js, whole architecture and folder structure is designed and coded by myself
 
 
 -RUN WITHOUT DOCKER-
