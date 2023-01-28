@@ -51,7 +51,7 @@ In terminal "npm run dockerDeploy". This will:
 
 
 In database/seeds/01_users.ts is list of users and their passwords
-API requests exaples and all routes are provided in exported postman collection, so please import postmanDocumentation from root project inside Postman Application and you are ready to start testing API. :)
+API requests exaples and all routes are provided in exported postman collection, so please import "Sports.postman_collection.json" from root project inside Postman Application and you are ready to start testing API. :)
 
 
 
