@@ -1,3 +1,4 @@
+import { Max, Min } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
 import { Class } from "./Class";
 import { User } from "./User";
@@ -8,6 +9,8 @@ export class ClassUser {
     id: number
 
     @Column()
+    @Min(1)
+    @Max(5)
     rating: number
 
     @Column()

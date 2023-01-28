@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Response } from 'express';
 import { Service } from "typedi";
 import CustomService from '../services/CustomService';
 
@@ -9,7 +9,7 @@ class CustomController {
     public async enroll(req: any, res: Response) {
         try {
             await this.customService.enroll(req)
-            res.json({ message: 'You are successfully enroll in class' })
+            res.json({ message: 'You have been successfully enrolled in class' })
         } catch (error) {
             res.status(500).json(error)
         }
@@ -17,8 +17,8 @@ class CustomController {
 
     public async unenroll(req: any, res: Response) {
         try {
-            let result = await this.customService.unenroll(req)
-            res.json(result)
+            await this.customService.unenroll(req)
+            res.json({ message: 'You have been successfully unenrolled from class' })
         } catch (error) {
             res.status(500).json(error)
         }
@@ -26,8 +26,8 @@ class CustomController {
 
     public async rate(req: any, res: Response) {
         try {
-            let result = await this.customService.rate(req)
-            res.json(result)
+            await this.customService.rate(req)
+            res.json({ message: 'You have been successfully rated class' })
         } catch (error) {
             res.status(500).json(error)
         }
@@ -35,8 +35,17 @@ class CustomController {
 
     public async comment(req: any, res: Response) {
         try {
-            let result = await this.customService.comment(req)
-            res.json(result)
+            await this.customService.comment(req)
+            res.json({ message: 'You have been successfully commented class' })
+        } catch (error) {
+            res.status(500).json(error)
+        }
+    }
+
+    public async getSports(req: any, res: Response) {
+        try {
+            let results = await this.customService.getSports()
+            res.json(results)
         } catch (error) {
             res.status(500).json(error)
         }

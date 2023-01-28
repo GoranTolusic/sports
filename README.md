@@ -1,4 +1,6 @@
 # SPORTS CLASS APPLICATION
+# HINT: This application is writting from scratch on top of micro framewrok Express.js, whole architecture and folder structure is designed and coded by myself
+
 
 -RUN WITHOUT DOCKER-
 
@@ -14,15 +16,13 @@ Need to fill initial credentials in .env file (database and admin user credentia
 
 In terminal run "npm run installApp" in root folder. This will:
 
--> install dependencies
+    -> install dependencies
 
--> If not exists, this will create database utf8_unicode_ci with same name as defined in .env file (DB_DATABASE variable)
+    -> If not exists, this will create database utf8_unicode_ci with same name as defined in .env file (DB_DATABASE variable)
 
--> run migrations
+    -> run migrations
 
--> run seeders for dummy/test data (make sure you fill admin credentials)
-
-In database/seeds/01_users.ts is list of users and their passwords
+    -> run seeders for dummy/test data (make sure you fill admin credentials)
 
 
 
@@ -38,17 +38,20 @@ Requirments:
 
 Need to fill initial credentials in .env file (database and admin user credentials)
 
-Run "npm run dockerDeploy". This will:
+In terminal "npm run dockerDeploy". This will:
 
--> Automaticaly build and run services needed for project
+    -> Automaticaly build and run services needed for project
 
--> If not exists, this will create database utf8_unicode_ci with same name as defined in .env file (DB_DATABASE variable)
+    -> If not exists, this will create database utf8_unicode_ci with same name as defined in .env file (DB_DATABASE variable)
 
--> run migrations
+    -> run migrations
 
--> run seeders for dummy/test data (make sure you fill admin credentials)
+    -> run seeders for dummy/test data (make sure you fill admin credentials)
+
+
 
 In database/seeds/01_users.ts is list of users and their passwords
-Please, import postmanDocumentation from root project inside Postman and you are ready to start testing API :)
+API requests exaples and all routes are provided in exported postman collection, so please import postmanDocumentation from root project inside Postman Application and you are ready to start testing API. :)
+
 
 
